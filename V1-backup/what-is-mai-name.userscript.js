@@ -34,14 +34,22 @@
         display: flex;
         justify-content: space-between;
       }
-`})
-    );
+`}));
 
     // https://poe.com/s/37w7R1x0HLIhbddDknHl
     function show_mai_name() {
         if (window.location.href.includes('/friend/')) {
             var seeThroughBlocks = document.querySelectorAll('.see_through_block');
-            var friendDictionary = JSON.parse(localStorage.getItem("friend_idx_JSON"));
+
+            // https://poe.com/s/ucBfQWPp389HJLcYoYaG
+            var friendDictionary;
+            var friendIdxJSON = localStorage.getItem("friend_idx_JSON");
+
+            if (friendIdxJSON) {
+                friendDictionary = JSON.parse(friendIdxJSON);
+            } else {
+                friendDictionary = {}; // Initialize an empty object if the localStorage item is empty
+            }
 
             seeThroughBlocks.forEach(function (block) {
                 var input = block.querySelector('input[name="idx"]');

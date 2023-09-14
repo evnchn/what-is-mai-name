@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Code Modal</title>
+  <style>
+    /* CSS for the modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+  </style>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+  <button onclick="showModalScanner()">Show QR Code</button>
+
+
+
+  <script>
+
+	
+	
+	function showModalScanner() {
+	
+	
+    function onScanSuccess(decodedText, decodedResult) {
+      // handle the scanned code as you like, for example:
+      console.log(`Code matched = ${decodedText}`, decodedResult);
+	  alert("Code scanned! Reloading");
+	  location.reload();
+    }
+
+    function onScanFailure(error) {
+      // handle scan failure, usually better to ignore and keep scanning.
+      // for example:
+      console.warn(`Code scan error = ${error}`);
+    }
+	
+  // Create the modal element
+  var modal = document.createElement("div");
+  modal.id = "modalScanner";
+  modal.className = "modal";
+
+  // Create the modal content element
+  var modalContent = document.createElement("div");
+  modalContent.className = "modal-content";
+
+  // Create the reader element
+  var reader = document.createElement("div");
+  reader.id = "reader";
+
+  // Append the reader element to the modal content
+  modalContent.appendChild(reader);
+
+  // Append the modal content to the modal
+  modal.appendChild(modalContent);
+
+  // Append the modal to the body
+  document.body.appendChild(modal);
+
+  // Display the modal
+  modal.style.display = "block";
+
+  // Create the HTML5 QR Code Scanner
+  html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader",
+    { fps: 10, qrbox: { width: 250, height: 250 } },
+    /* verbose= */ false
+  );
+  html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+}
+  </script>
+</body>
+</html>
