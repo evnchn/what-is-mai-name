@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         what-is-mai-name
 // @namespace    https://github.com/evnchn/what-is-mai-name
-// @version      2.0
+// @version      2.1
 // @description  Custom names for friends on maimai DX net
 // @match        https://maimaidx-eng.com/maimai-mobile/friend/*
 // ==/UserScript==
