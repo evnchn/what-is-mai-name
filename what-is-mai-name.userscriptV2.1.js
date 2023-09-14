@@ -12,6 +12,21 @@
 (function () {
     'use strict';
 
+
+
+
+    // https://poe.com/s/mpSe59695QC4riWzlbBY
+    var regex = /[^A-Za-z0-9\-_.!~*'();\/?:@&=+$,#%]/;
+    function is_URLSafe(input) {
+        if (regex.test(input)) {
+            console.log("String contains invalid characters.");
+            return false;
+        } else {
+            console.log("String is valid.");
+            return true;
+        }
+    }
+
     // https://poe.com/s/bdiJU29DG197XMfKf4dP
     function isJSONValid(jsonString) {
         try {
@@ -135,7 +150,7 @@
           overflow: auto;
           background-color: rgba(0, 0, 0, 0.4);
         }
-    
+
         .modal-content-scanner {
           display: flex;
           justify-content: center;
@@ -164,7 +179,7 @@
           align-items: center;
           z-index: 9999;
         }
-    
+
         /* Styling for the modal content */
         .modal-content {
           background-color: none;
@@ -190,6 +205,7 @@
     `}));
 
             function showModal(text_in) {
+                console.log(text_in);
                 // Create the modal overlay div
                 var modalOverlay = document.createElement("div");
                 modalOverlay.id = "modalOverlay";
@@ -233,7 +249,6 @@
             }
 
             const titleElement = document.querySelector(".title");
-            const friendIdxJSON = localStorage.getItem("friend_idx_JSON");
             titleElement.addEventListener("click", function () {
 
 
@@ -241,8 +256,8 @@
                 if (window.location.href.includes('/search/')) {
                     showModalScanner();
                 } else {
-                    if (friendIdxJSON) {
-                        showModal(friendIdxJSON);
+                    if (localStorage.getItem("friend_idx_JSON")) {
+                        showModal(localStorage.getItem("friend_idx_JSON"));
                     }
                 }
             });
@@ -290,6 +305,15 @@
                 friendDictionary = {}; // Initialize an empty object if the localStorage item is empty
             }
 
+            for (const key in friendDictionary) {
+                var raw_friendName = friendDictionary[key];
+                if (!is_URLSafe(raw_friendName)) {
+                    friendDictionary[key] = encodeURI(friendDictionary[key]);
+                    localStorage.setItem("friend_idx_JSON", JSON.stringify(friendDictionary));
+                    raw_friendName = friendDictionary[key];
+                }
+                console.log(`Checked key ${key}`);
+            }
             seeThroughBlocks.forEach(function (block) {
                 var input = block.querySelector('input[name="idx"]');
                 if (input) {
@@ -307,7 +331,20 @@
 
                         var friendNameContainer = document.createElement('span');
                         friendNameContainer.className = 'friend_name';
-                        var friendName = friendDictionary[value] || `ID ${value} not found`;
+
+
+
+                        var raw_friendName = friendDictionary[value];
+                        if (!is_URLSafe(raw_friendName)) {
+                            friendDictionary[value] = encodeURI(friendDictionary[value]);
+                            localStorage.setItem("friend_idx_JSON", JSON.stringify(friendDictionary));
+                            raw_friendName = friendDictionary[value];
+                        }
+                        var friendName = `ID ${value} not found`;
+                        if (raw_friendName) {
+                            friendName = decodeURI(friendDictionary[value]);
+                        }
+
                         friendNameContainer.innerText = friendName;
 
                         var editButton = document.createElement('button');
@@ -316,7 +353,7 @@
                         editButton.addEventListener('click', function () {
                             var newFriendName = prompt('Enter the new name for the friend:');
                             if (newFriendName) {
-                                friendDictionary[value] = newFriendName;
+                                friendDictionary[value] = encodeURI(newFriendName);
                                 localStorage.setItem("friend_idx_JSON", JSON.stringify(friendDictionary));
                                 show_mai_name(); // Update the displayed name
                             }
