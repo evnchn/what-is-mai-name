@@ -17,6 +17,8 @@ Press `Edit Name` to edit the name.
 
 Pay attention to the blue header image in the friends page. 
 
+Normally, there is no click action involved. This is why it has now been repurposed as a button. 
+
 ![image](https://github.com/evnchn/what-is-mai-name/assets/37951241/6b16f710-65a9-479a-a248-7d07dcbe7d5f)
 
 - Under "Search" tab, QR code scanner is opened to import name data
