@@ -1,11 +1,14 @@
 // ==UserScript==
 // @name         what-is-mai-name
 // @namespace    https://github.com/evnchn/what-is-mai-name
-// @version      2.1
+// @version      2.2
 // @description  Custom names for friends on maimai DX net
 // @match        https://maimaidx-eng.com/maimai-mobile/friend/*
+// @downloadURL  https://raw.githubusercontent.com/evnchn/what-is-mai-name/main/what-is-mai-name.userscript.js
+// @updateURL    https://raw.githubusercontent.com/evnchn/what-is-mai-name/main/what-is-mai-name.userscript.js
 // ==/UserScript==
 
+// V2.2: Self-update
 
 
 
