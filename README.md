@@ -2,10 +2,11 @@
 Custom names for friends on maimai DX net
 
 ## Install
-1. Add `mai-chart-chart.js` into your favourite userscript manager
+1. Add `what-is-mai-name.userscript.js` into your favourite userscript manager
 2. Done
 
 **Note: Do not use V2.0 which cannot handle Unicode usernames properly, as the QRCode library considers the string with a very long length for no reason. Update to V2.1 ASAP.**
+**Note: If you were on `what-is-mai-name.userscriptV2.1.js`, the last release before auto-update was added, you need to reinstall.**
 
 ## Result
 
