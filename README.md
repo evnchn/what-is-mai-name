@@ -29,6 +29,6 @@ Normally, there is no click action involved. This is why it has now been repurpo
 
 ## Future developments
 
-1. Cross-device sync
+1. ~~Cross-device sync (partly done via QR code, though experience can be smoother)~~
 2. Jump to relevant Discord / Instagram / WhatsApp for easy chatting
 
