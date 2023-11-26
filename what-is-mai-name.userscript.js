@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         what-is-mai-name
 // @namespace    https://github.com/evnchn/what-is-mai-name
-// @version      2.2
+// @version      2.3
 // @description  Custom names for friends on maimai DX net
 // @match        https://maimaidx-eng.com/maimai-mobile/friend/*
 // @downloadURL  https://raw.githubusercontent.com/evnchn/what-is-mai-name/main/what-is-mai-name.userscript.js
@@ -9,6 +9,8 @@
 // ==/UserScript==
 
 // V2.2: Self-update
+
+// V2.3: Compatible with all-mai-friends
 
 
 
@@ -92,10 +94,17 @@
         // Display the modal
         modal.style.display = "block";
 
+        let qrboxFunction = function (viewfinderWidth, viewfinderHeight) {
+            return {
+                width: viewfinderWidth,
+                height: viewfinderHeight
+            };
+        }
+
         // Create the HTML5 QR Code Scanner
         var html5QrcodeScanner = new Html5QrcodeScanner(
             "reader",
-            { fps: 10, qrbox: { width: 250, height: 250 } },
+            { fps: 10, qrbox: qrboxFunction },
         /* verbose= */ false
         );
         html5QrcodeScanner.render(onScanSuccess, onScanFailure);
@@ -372,6 +381,8 @@
     }
 
     show_mai_name(); // Run the function immediately after defining
+
+    unsafeWindow.evnchn__what_is_mai_name_refresh = show_mai_name;
 
 
 })();
